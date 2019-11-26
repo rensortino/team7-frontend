@@ -1,0 +1,25 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tweets">
+      <ion-icon name="logo-twitter"></ion-icon>
+      <ion-label>Tweets</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="users">
+      <ion-icon name="people"></ion-icon>
+      <ion-label>Users</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="hasCordova" tab="extra">
+      <ion-icon name="logo-ionic"></ion-icon>
+      <ion-label>Extra</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon name="contact"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

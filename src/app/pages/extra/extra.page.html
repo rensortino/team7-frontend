@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>extra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollY]="false">
+
+  <div class="form__container">
+
+    <ion-button color="tertiary" fill="solid" expand="block" (click)="vibrate()">Vibrate</ion-button>
+
+    <ion-button color="warning" fill="solid" expand="block" (click)="openQRScanner()">QR Scanner</ion-button>
+    <p *ngIf="barcodeData.text">{{ barcodeData.text }}</p>
+
+    <ion-button color="danger" fill="solid" expand="block" (click)="getPosition()">Geo Coordinates</ion-button>
+    <ion-grid *ngIf="geoPosition.coords">
+      <ion-row>
+        <ion-col size="4">Accuracy</ion-col>
+        <ion-col size="8">{{ geoPosition.coords.accuracy }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Altitude</ion-col>
+        <ion-col size="8">{{ geoPosition.coords.altitude }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Heading</ion-col>
+        <ion-col size="8">{{ geoPosition.coords.heading }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Latitude</ion-col>
+        <ion-col size="8">{{ geoPosition.coords.latitude }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Longitude</ion-col>
+        <ion-col size="8">{{ geoPosition.coords.longitude }}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4">Speed</ion-col>
+        <ion-col size="8">{{ geoPosition.coords.speed }}</ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </div>
+
+</ion-content>

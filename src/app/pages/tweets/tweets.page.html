@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>tweets</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let tweet of tweets">
+
+      <ion-item>
+        <ion-label>
+          <h2>{{tweet.tweet}}</h2>
+  
+          <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(tweet)">
+            {{ getAuthor(tweet) }} 
+            <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
+          </p>
+          <ng-template #userDeleted>
+            <p class="user-deleted">User deleted</p>
+          </ng-template>
+  
+        </ion-label>
+        <ion-note slot="end">{{ tweet.created_at | unictDate: 1 }}</ion-note>
+      </ion-item>
+  
+      <ion-item-options *ngIf="canEdit(tweet)" side="end">
+        <ion-item-option color="secondary" (click)="createOrEditTweet(tweet)">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="deleteTweet(tweet)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="createOrEditTweet()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

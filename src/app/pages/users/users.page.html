@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollY]="false">
+
+  <ion-list>
+
+    <ion-item *ngFor="let user of users; let i = index" [color]="getItemColor(user)">
+
+      <ion-avatar class="user-avatar">
+        <img [src]="'./assets/users/' + usersPics[i] + '.svg'">
+      </ion-avatar>
+      
+      <ion-label class="ion-text-wrap">
+        <ion-text color="primary">
+          <h3>{{ user.name }} {{ user.surname }}</h3>
+        </ion-text>
+        <p>{{ user.email }}</p>
+      </ion-label>
+    
+    </ion-item>
+
+  </ion-list> 
+
+</ion-content>

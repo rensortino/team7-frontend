@@ -1,0 +1,54 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+.form__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    ion-button {margin-top: 20px;}
+}
+
+.error {
+    --color: var(--ion-color-danger-contrast);
+    --background: var(--ion-color-danger);
+}
+.success {
+    --color: var(--ion-color-success-contrast);
+    --background: var(--ion-color-success);
+}
+.warning {
+    --color: var(--ion-color-dark);
+    --background: var(--ion-color-warning);
+}
+.general {
+    --color: var(--ion-color-primary-contrast);
+    --background: var(--ion-color-primary);
+}
+
+//_____________________________________
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
