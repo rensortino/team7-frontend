@@ -10,7 +10,7 @@
 
     <ion-item-sliding *ngFor="let tweet of tweets">
 
-      <ion-item (click)="showComments(tweet)">
+      <ion-item>
         <ion-label>
           <h2>{{tweet.tweet}}</h2>
   
@@ -22,23 +22,12 @@
             <p class="user-deleted">User deleted</p>
           </ng-template>
           <ion-icon name="create" (click)="createComment(tweet)" ></ion-icon>
-
-          <ng-container *ngIf="commentsShowed">
-            <ion-list>
-              <ion-item *ngFor="let tweet of tweets">
-                <h2>{{tweet.tweet}}</h2>
-              </ion-item>
-            </ion-list>
-          </ng-container>
   
         </ion-label>
         <ion-note slot="end">{{ tweet.created_at | unictDate: 1 }}</ion-note>
       </ion-item>
   
       <ion-item-options *ngIf="canEdit(tweet)" side="end">
-        <ion-item-option color="success" (click)="createComment(tweet)">
-          <ion-icon slot="icon-only" name="chatboxes"></ion-icon>
-        </ion-item-option>
         <ion-item-option color="secondary" (click)="createOrEditTweet(tweet)">
           <ion-icon slot="icon-only" name="create"></ion-icon>
         </ion-item-option>

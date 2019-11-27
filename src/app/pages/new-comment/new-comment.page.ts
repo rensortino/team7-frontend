@@ -15,6 +15,8 @@ export class NewCommentPage implements OnInit {
 
   newComment = {} as NewTweet;
 
+  comments: Tweet[] = [];
+
   parentTweet: Tweet;
 
   constructor(
@@ -25,8 +27,33 @@ export class NewCommentPage implements OnInit {
     private uniLoader: UniLoaderService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.parentTweet = this.navParams.get('tweet');
+    await this.getComments();
+  }
+
+  async getComments() {
+
+    try {
+
+      // Avvio il loader
+      await this.uniLoader.show();
+
+      // Popolo il mio array di oggetti 'Tweet' con quanto restituito dalla chiamata API
+      this.comments = await this.tweetsService.getComments(this.parentTweet);
+
+      // La chiamata è andata a buon fine, dunque rimuovo il loader
+      await this.uniLoader.dismiss();
+
+    } catch (err) {
+
+      // Nel caso la chiamata vada in errore, mostro l'errore in un toast
+      await this.toastService.show({
+        message: err.message,
+        type: ToastTypes.ERROR
+      });
+
+    }
 
   }
 

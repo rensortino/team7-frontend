@@ -11,6 +11,29 @@
 
 <ion-content [scrollY]="false">
 
+    <ion-list>
+
+        <ion-item-sliding *ngFor="let comment of comments">
+    
+          <ion-item>
+            <ion-label>
+              <h2>{{comment.tweet}}</h2>
+      <!--
+              <p *ngIf="comment._author; else userDeleted" class="user">
+                {{ getAuthor(comment) }} 
+              </p>
+              <ng-template #userDeleted>
+                <p class="user-deleted">User deleted</p>
+              </ng-template>
+        -->
+      
+            </ion-label>
+            <ion-note slot="end">{{ comment.created_at }}</ion-note>
+          </ion-item>
+        </ion-item-sliding>
+    
+      </ion-list>
+
     <ion-item>
   
       <ion-label position="stacked">Write your message</ion-label>

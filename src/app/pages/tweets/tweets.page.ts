@@ -17,9 +17,7 @@ import { ToastTypes } from 'src/app/enums/toast-types.enum';
 export class TweetsPage implements OnInit {
 
   tweets: Tweet[] = [];
-  commentsShowed: boolean;
-  comments: Tweet[] = [];
-
+  
   constructor(
     private tweetsService: TweetsService,
     private modalCtrl: ModalController,
@@ -121,33 +119,6 @@ export class TweetsPage implements OnInit {
     // Visualizzo la modal
     return await modal.present();
 
-  }
-
-  async showComments(tweet: Tweet) {
-
-    this.commentsShowed = true;
-    
-    try {
-
-      // Avvio il loader
-      await this.uniLoader.show();
-
-      // Popolo il mio array di oggetti 'Tweet' con quanto restituito dalla chiamata API
-      this.comments = await this.tweetsService.getComments(tweet);
-
-      // La chiamata è andata a buon fine, dunque rimuovo il loader
-      await this.uniLoader.dismiss();
-
-    } catch (err) {
-
-      // Nel caso la chiamata vada in errore, mostro l'errore in un toast
-      await this.toastService.show({
-        message: err.message,
-        type: ToastTypes.ERROR
-      });
-
-    }
-    
   }
 
   async deleteTweet(tweet: Tweet) {
