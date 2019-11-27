@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Tweet, NewTweet } from 'src/app/interfaces/tweet';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../auth/auth.service'; 
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +29,24 @@ export class TweetsService {
     }).toPromise();
   }
 
+  async createComment(newTweet: NewTweet) {
+    console.log(newTweet);
+    const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
+    return this.http.post<Tweet>(`${environment.API_URL}/tweets/${newTweet._parent}`, newTweet, {
+      headers: headerOptions
+    }).toPromise();
+  }
+
+
+
   // READ
   async getTweets() {
     return this.http.get<Tweet[]>(`${environment.API_URL}/tweets`).toPromise();
+  }
+
+
+  async getComments(tweet: Tweet) {
+    return this.http.get<Tweet[]>(`${environment.API_URL}/tweets/${tweet._id}`).toPromise();
   }
 
   // UPDATE

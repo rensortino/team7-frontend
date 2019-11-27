@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Tweet } from 'src/app/interfaces/tweet';
 import { TweetsService } from 'src/app/services/tweets/tweets.service';
 import { ModalController } from '@ionic/angular';
+import { NewCommentPage } from '../new-comment/new-comment.page';
 import { NewTweetPage } from '../new-tweet/new-tweet.page';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
@@ -16,6 +17,8 @@ import { ToastTypes } from 'src/app/enums/toast-types.enum';
 export class TweetsPage implements OnInit {
 
   tweets: Tweet[] = [];
+  commentsShowed: boolean;
+  comments: Tweet[] = [];
 
   constructor(
     private tweetsService: TweetsService,
@@ -88,6 +91,63 @@ export class TweetsPage implements OnInit {
     // Visualizzo la modal
     return await modal.present();
 
+  }
+
+  async createComment(tweet: Tweet) {
+    
+    const modal = await this.modalCtrl.create({
+      component: NewCommentPage,
+      componentProps: {
+        tweet
+      }
+    });
+
+
+    /*
+        Quando l'utente chiude la modal ( modal.onDidDismiss() ),
+        aggiorno il mio array di tweets
+    */
+    modal.onDidDismiss()
+    .then(async () => {
+
+      // Aggiorno la mia lista di tweet, per importare le ultime modifiche apportate dall'utente
+      await this.getTweets();
+
+      // La chiamata è andata a buon fine, dunque rimuovo il loader
+      await this.uniLoader.dismiss();
+
+    });
+
+    // Visualizzo la modal
+    return await modal.present();
+
+  }
+
+  async showComments(tweet: Tweet) {
+
+    this.commentsShowed = true;
+    
+    try {
+
+      // Avvio il loader
+      await this.uniLoader.show();
+
+      // Popolo il mio array di oggetti 'Tweet' con quanto restituito dalla chiamata API
+      this.comments = await this.tweetsService.getComments(tweet);
+
+      // La chiamata è andata a buon fine, dunque rimuovo il loader
+      await this.uniLoader.dismiss();
+
+    } catch (err) {
+
+      // Nel caso la chiamata vada in errore, mostro l'errore in un toast
+      await this.toastService.show({
+        message: err.message,
+        type: ToastTypes.ERROR
+      });
+
+    }
+    
   }
 
   async deleteTweet(tweet: Tweet) {

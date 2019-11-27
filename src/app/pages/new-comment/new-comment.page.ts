@@ -7,17 +7,15 @@ import { ToastTypes } from 'src/app/enums/toast-types.enum';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 
 @Component({
-  selector: 'app-new-tweet',
-  templateUrl: './new-tweet.page.html',
-  styleUrls: ['./new-tweet.page.scss'],
+  selector: 'app-new-comment',
+  templateUrl: './new-comment.page.html',
+  styleUrls: ['./new-comment.page.scss'],
 })
-export class NewTweetPage implements OnInit {
+export class NewCommentPage implements OnInit {
 
-  newTweet = {} as NewTweet;
+  newComment = {} as NewTweet;
 
-  tweetToEdit: Tweet;
-
-  editMode = false;
+  parentTweet: Tweet;
 
   constructor(
     private modalCtrl: ModalController,
@@ -28,12 +26,7 @@ export class NewTweetPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    /*
-        Importo il parametro Tweet se acceddo alla modale per MODIFICARE
-        Nel caso di accesso alla modal per createReadStream, la mia variabile sarà undefined
-    */
-    this.tweetToEdit = this.navParams.get('tweet');
-    this.editMode = this.tweetToEdit !== undefined;
+    this.parentTweet = this.navParams.get('tweet');
 
   }
 
@@ -43,24 +36,17 @@ export class NewTweetPage implements OnInit {
 
   }
 
-  async createOrEditTweet() {
+  async createComment() {
 
     try {
 
       // Avvio il loader
       await this.uniLoader.show();
 
-      if (this.editMode) {
-
-        // Chiamo la editTweet se l'utente sta modificando un tweet esistente
-        await this.tweetsService.editTweet(this.tweetToEdit);
-
-      } else {
-
-        // Chiamo la createTweet se l'utente sta creando un nuovo tweet
-        await this.tweetsService.createTweet(this.newTweet);
+      // Chiamo la createTweet se l'utente sta creando un nuovo tweet
+      this.newComment._parent = this.parentTweet;
+      await this.tweetsService.createComment(this.newComment);
         
-      }
 
       // Chiudo la modal
       await this.dismiss();
@@ -82,18 +68,12 @@ export class NewTweetPage implements OnInit {
 
   isDataInvalid(): boolean {
 
-    if (this.editMode) {
-      return !this.tweetToEdit.tweet.length ||
-      this.tweetToEdit.tweet.length > 120;
-    } else {
-      if (this.newTweet.tweet) {
-        return !this.newTweet.tweet.length ||
-        this.newTweet.tweet.length > 120;
-      }
-      return true;
+    if (this.newComment.tweet) {
+      return !this.newComment.tweet.length ||
+      this.newComment.tweet.length > 120;
     }
+    return true;
 
   }
 
 }
- 

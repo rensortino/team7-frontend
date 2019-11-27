@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { LoginPageModule } from './pages/login/login.module';
 import { NewTweetPageModule } from './pages/new-tweet/new-tweet.module';
+import { NewCommentPageModule } from './pages/new-comment/new-comment.module';
 import { HasCordovaService } from './shared/hasCordova.service';
 import { UniLoaderService } from './shared/uniLoader.service';
 import { UniAlertService } from './shared/uniAlert.service';
@@ -28,7 +30,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    NewTweetPageModule
+    LoginPageModule,
+    NewTweetPageModule,
+    NewCommentPageModule
   ],
   providers: [
     StatusBar,
