@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tweet } from 'src/app/interfaces/tweet';
+import  { User } from '../../interfaces/user';
 import { TweetsService } from 'src/app/services/tweets/tweets.service';
 import { ModalController } from '@ionic/angular';
 import { NewCommentPage } from '../new-comment/new-comment.page';
@@ -17,6 +18,10 @@ import { ToastTypes } from 'src/app/enums/toast-types.enum';
 export class TweetsPage implements OnInit {
 
   tweets: Tweet[] = [];
+
+  likes: User[] = [];
+
+  likesCount: number;
   
   constructor(
     private tweetsService: TweetsService,
@@ -42,6 +47,7 @@ export class TweetsPage implements OnInit {
 
       // Popolo il mio array di oggetti 'Tweet' con quanto restituito dalla chiamata API
       this.tweets = await this.tweetsService.getTweets();
+      
 
       // La chiamata è andata a buon fine, dunque rimuovo il loader
       await this.uniLoader.dismiss();
@@ -100,9 +106,6 @@ export class TweetsPage implements OnInit {
       }
     });
 
-    
-
-
     /*
         Quando l'utente chiude la modal ( modal.onDidDismiss() ),
         aggiorno il mio array di tweets
@@ -121,6 +124,20 @@ export class TweetsPage implements OnInit {
     // Visualizzo la modal
     return await modal.present();
 
+  }
+
+  async like(tweet: Tweet)  {
+    console.log("liked");
+    return await this.tweetsService.like(tweet);
+  }
+
+  async getLikes(tweet: Tweet) {
+    tweet.likes = await this.tweetsService.getLikes();
+  }
+
+  async getLikesCount(tweet: Tweet) {
+    if(tweet.likes !== undefined)
+      return await tweet.likes.length;
   }
 
   async deleteTweet(tweet: Tweet) {

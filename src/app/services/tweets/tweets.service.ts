@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Tweet, NewTweet } from 'src/app/interfaces/tweet';
+import { User } from 'src/app/interfaces/user';
 import { AuthService } from '../auth/auth.service'; 
 
 @Injectable({
@@ -49,10 +50,21 @@ export class TweetsService {
     return this.http.get<Tweet[]>(`${environment.API_URL}/tweets/${tweet._id}` ).toPromise();
   }
 
+  async getLikes() {
+    return this.http.get<User[]>(`${environment.API_URL}/tweets/like/`).toPromise();
+  }
+
   // UPDATE
   async editTweet(tweet: Tweet) {
     const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
     return this.http.put<any>(`${environment.API_URL}/tweets/${tweet._id}`, tweet, {
+      headers: headerOptions
+    }).toPromise();
+  }
+
+  async like(tweet: Tweet) {
+    const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
+    return this.http.put<any>(`${environment.API_URL}/tweets/like/${tweet._id}`, {
       headers: headerOptions
     }).toPromise();
   }

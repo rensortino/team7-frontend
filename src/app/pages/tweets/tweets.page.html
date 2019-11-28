@@ -20,8 +20,9 @@
           </p>
           
           <p>      
-            <ion-icon name="thumbs-up" color="danger-tint"></ion-icon> 
+            <ion-icon (click)="like(tweet)" name="thumbs-up" color="danger-tint"></ion-icon> 
           </p>
+          <h2></h2>
       
           <ng-template #userDeleted>
             <p class="user-deleted">User deleted</p>
