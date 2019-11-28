@@ -10,9 +10,14 @@
     font-weight: bold;
     color: var(--ion-color-danger-tint);
 }
-.liked{
-    color: var(--ion-color-danger);
+#like_zone{
+    background-color: lightgray;
+    margin-right: 5%;
 }
-.NotLiked{
-    color: var(--ion-color-primary);
+.like{
+    color: red;
+    font-size: 20px;
+}
+.comment-size{
+    font-size: 20px;
 }

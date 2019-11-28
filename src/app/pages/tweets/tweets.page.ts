@@ -10,7 +10,6 @@ import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
 
-
 @Component({
   selector: 'app-tweets',
   templateUrl: './tweets.page.html',
@@ -142,15 +141,14 @@ export class TweetsPage implements OnInit {
       return tweet._likes.length;
   }
 
-  userLiked(tweet:Tweet): boolean {
-    tweet._likes.forEach(user => {
-      if (this.auth.me._id === user){
-        console.log('true')
-        return true;
-      }
-    });
-    console.log('false')
-    return false
+  userLiked(tweet: Tweet) : boolean{
+    let i: number;
+    let flag: boolean = false;
+    for(i=0; i<tweet._likes.length;i++){
+      if(tweet._likes[i] === this.auth.me._id)
+        flag = true;
+    }
+    return flag;
   }
   
 
