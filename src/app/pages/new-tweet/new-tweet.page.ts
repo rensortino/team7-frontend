@@ -6,6 +6,7 @@ import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 
+
 @Component({
   selector: 'app-new-tweet',
   templateUrl: './new-tweet.page.html',
@@ -37,12 +38,13 @@ export class NewTweetPage implements OnInit {
 
   }
 
+  
   async dismiss() {
 
     await this.modalCtrl.dismiss();
 
   }
-
+  
   async createOrEditTweet() {
 
     try {

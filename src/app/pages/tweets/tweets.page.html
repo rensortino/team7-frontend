@@ -18,6 +18,11 @@
             {{ getAuthor(tweet) }} 
             <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
           </p>
+          
+          <p>      
+            <ion-icon name="thumbs-up" color="danger-tint"></ion-icon> 
+          </p>
+      
           <ng-template #userDeleted>
             <p class="user-deleted">User deleted</p>
           </ng-template>
@@ -37,7 +42,7 @@
       </ion-item-options>
     </ion-item-sliding>
 
-  </ion-list>
+    </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="createOrEditTweet()">

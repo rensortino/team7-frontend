@@ -5,6 +5,7 @@ import { TweetsService } from 'src/app/services/tweets/tweets.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-new-comment',
@@ -23,6 +24,7 @@ export class NewCommentPage implements OnInit {
     private modalCtrl: ModalController,
     private tweetsService: TweetsService,
     private navParams: NavParams,
+    private auth: AuthService,
     private toastService: ToastService,
     private uniLoader: UniLoaderService
   ) { }
@@ -62,6 +64,27 @@ export class NewCommentPage implements OnInit {
     await this.modalCtrl.dismiss();
 
   }
+
+  getAuthor(tweet: Tweet): string {
+
+    if (this.canEdit(tweet)) {
+      return 'You';
+    } else {
+      return tweet._author.name + ' ' + tweet._author.surname;
+    }
+  }
+
+  canEdit(tweet: Tweet): boolean {
+
+    // Controllo che l'autore del tweet coincida col mio utente
+    if (tweet._author) {
+      return tweet._author._id === this.auth.me._id;
+    }
+
+    return false;
+
+  }
+
 
   async createComment() {
 

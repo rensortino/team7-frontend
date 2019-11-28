@@ -100,6 +100,8 @@ export class TweetsPage implements OnInit {
       }
     });
 
+    
+
 
     /*
         Quando l'utente chiude la modal ( modal.onDidDismiss() ),
