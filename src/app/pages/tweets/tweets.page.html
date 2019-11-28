@@ -17,9 +17,12 @@
           <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(tweet)">
             {{ getAuthor(tweet) }} 
             <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
-          </p>          
-          <ion-icon  (click)="like(tweet)" name="thumbs-up" [color]="userLiked(tweet) ? 'primary' : 'danger'"></ion-icon> 
-          <ion-badge color = 'danger'>{{getLikesCount(tweet)}}</ion-badge>
+          </p>  
+          <ion-badge id='like_zone'>        
+            <ion-icon (click)="like(tweet)" name="thumbs-up" class="like" [class.liked]="userLiked(tweet)"></ion-icon> 
+            <span>{{getLikesCount(tweet)}}</span>
+          </ion-badge>
+
           <ng-template #userDeleted>
             <p class="user-deleted">User deleted</p>
           </ng-template>
