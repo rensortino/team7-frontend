@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/interfaces/user';
+import {Tweet} from 'src/app/interfaces/tweet';
 import { AuthService } from '../auth/auth.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +43,20 @@ export class UsersService {
   async deleteUser(userId: string) {
     const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
     return this.http.delete<any>(`${environment.API_URL}/users/${userId}`, {
+      headers: headerOptions
+    }).toPromise();
+  }
+  // ADD FAVOURITE
+  async addfavourite(tweet: Tweet) {
+    const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
+    return this.http.put<User>(`${environment.API_URL}/users/prefer/${tweet._id}`, {}, {
+      headers: headerOptions
+    }).toPromise();
+  }
+  // GET FAVOURITES
+  async getfavourites() {
+    const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
+    return this.http.get<Tweet[]>(`${environment.API_URL}/users/prefer/`, {
       headers: headerOptions
     }).toPromise();
   }

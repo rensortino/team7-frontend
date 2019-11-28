@@ -20,6 +20,7 @@
           </p>          
           <ion-icon  (click)="like(tweet)" name="thumbs-up" [color]="userLiked(tweet) ? 'primary' : 'danger'"></ion-icon> 
           <ion-badge color = 'danger'>{{getLikesCount(tweet)}}</ion-badge>
+          <ion-icon name = 'ios-star-outline' (click)='addfavourite(tweet)'></ion-icon>
           <ng-template #userDeleted>
             <p class="user-deleted">User deleted</p>
           </ng-template>

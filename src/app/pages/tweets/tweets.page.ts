@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tweet } from 'src/app/interfaces/tweet';
-import  { User } from '../../interfaces/user';
 import { TweetsService } from 'src/app/services/tweets/tweets.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import { ModalController } from '@ionic/angular';
 import { NewCommentPage } from '../new-comment/new-comment.page';
 import { NewTweetPage } from '../new-tweet/new-tweet.page';
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
-import { stringify } from 'querystring';
+
 
 @Component({
   selector: 'app-tweets',
@@ -19,11 +19,10 @@ import { stringify } from 'querystring';
 export class TweetsPage implements OnInit {
 
   tweets: Tweet[] = [];
-
-  likesCount: number;
   
   constructor(
     private tweetsService: TweetsService,
+    private usersService: UsersService,
     private modalCtrl: ModalController,
     private auth: AuthService,
     private uniLoader: UniLoaderService,
@@ -34,7 +33,6 @@ export class TweetsPage implements OnInit {
 
     // Quando carico la pagina, riempio il mio array di Tweets
     await this.getTweets();
-    console.log(this.tweets);
   }
 
   async getTweets() {
@@ -134,6 +132,9 @@ export class TweetsPage implements OnInit {
     return 
 
 
+  }
+  async addfavourite(tweet: Tweet) {
+    await this.usersService.addfavourite(tweet)
   }
 
   

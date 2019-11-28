@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'extra', loadChildren: './pages/extra/extra.module#ExtraPageModule' },
   { path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule' },
   { path: 'new-tweet', loadChildren: './pages/new-tweet/new-tweet.module#NewTweetPageModule' },
-  { path: 'new-comment', loadChildren: './pages/new-comment/new-comment.module#NewCommentPageModule' }
+  { path: 'new-comment', loadChildren: './pages/new-comment/new-comment.module#NewCommentPageModule' },  { path: 'favourites', loadChildren: './pages/favourites/favourites.module#FavouritesPageModule' }
+
 ];
 @NgModule({
   imports: [

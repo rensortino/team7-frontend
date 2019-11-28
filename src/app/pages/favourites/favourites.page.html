@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>favourites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+
+        <ion-item-sliding *ngFor="let tweet of favouritesTweets">
+    
+          <ion-item>
+            <ion-label>
+              <h2>{{tweet.tweet}}</h2>
+      
+              <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(tweet)">
+                {{ getAuthor(tweet) }} 
+                <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
+              </p>           
+              <ion-badge color = 'danger'>{{getLikesCount(tweet)}}</ion-badge>
+              <ion-icon name = 'ios-star'></ion-icon>
+              <ng-template #userDeleted>
+                <p class="user-deleted">User deleted</p>
+              </ng-template>
+      
+            </ion-label>
+            <ion-note slot="end">{{ tweet.created_at }}</ion-note>
+          </ion-item>
+        </ion-item-sliding>
+    
+        </ion-list>
+
+</ion-content>
