@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-tweets',
@@ -18,8 +19,6 @@ import { ToastTypes } from 'src/app/enums/toast-types.enum';
 export class TweetsPage implements OnInit {
 
   tweets: Tweet[] = [];
-
-  likes: User[] = [];
 
   likesCount: number;
   
@@ -35,7 +34,7 @@ export class TweetsPage implements OnInit {
 
     // Quando carico la pagina, riempio il mio array di Tweets
     await this.getTweets();
-
+    console.log(this.tweets);
   }
 
   async getTweets() {
@@ -126,19 +125,33 @@ export class TweetsPage implements OnInit {
 
   }
 
-  async like(tweet: Tweet)  {
-    console.log("liked");
-    return await this.tweetsService.like(tweet);
+  async like(tweet: Tweet)  { 
+
+    await this.tweetsService.like(tweet);
+    await this.getTweets();
+
+    console.log('liked')
+    return 
+
+
   }
 
-  async getLikes(tweet: Tweet) {
-    tweet.likes = await this.tweetsService.getLikes();
+  
+  getLikesCount(tweet: Tweet) : number {
+      return tweet._likes.length;
   }
 
-  async getLikesCount(tweet: Tweet) {
-    if(tweet.likes !== undefined)
-      return await tweet.likes.length;
+  userLiked(tweet:Tweet): boolean {
+    tweet._likes.forEach(user => {
+      if (this.auth.me._id === user){
+        console.log('true')
+        return true;
+      }
+    });
+    console.log('false')
+    return false
   }
+  
 
   async deleteTweet(tweet: Tweet) {
 

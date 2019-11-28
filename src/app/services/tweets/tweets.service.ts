@@ -50,8 +50,8 @@ export class TweetsService {
     return this.http.get<Tweet[]>(`${environment.API_URL}/tweets/${tweet._id}` ).toPromise();
   }
 
-  async getLikes() {
-    return this.http.get<User[]>(`${environment.API_URL}/tweets/like/`).toPromise();
+  async getLikes(tweet: Tweet) {
+    return this.http.get<User[]>(`${environment.API_URL}/tweets/like/${tweet._id}`).toPromise();
   }
 
   // UPDATE
@@ -64,7 +64,7 @@ export class TweetsService {
 
   async like(tweet: Tweet) {
     const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
-    return this.http.put<any>(`${environment.API_URL}/tweets/like/${tweet._id}`, {
+    return this.http.put<any>(`${environment.API_URL}/tweets/like/${tweet._id}`,{}, {
       headers: headerOptions
     }).toPromise();
   }

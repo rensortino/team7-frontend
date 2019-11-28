@@ -10,6 +10,9 @@
     font-weight: bold;
     color: var(--ion-color-danger-tint);
 }
-#like{
-    padding-right: 10%;
+.liked{
+    color: var(--ion-color-danger);
+}
+.NotLiked{
+    color: var(--ion-color-primary);
 }
