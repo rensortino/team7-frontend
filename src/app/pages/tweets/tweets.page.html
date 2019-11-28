@@ -18,15 +18,13 @@
             {{ getAuthor(tweet) }} 
             <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
           </p>
-          
-          <p>      
-            <ion-icon name="thumbs-up" color="danger-tint"></ion-icon> 
-          </p>
+            
+          <ion-icon id="like" name="thumbs-up"></ion-icon> 
       
           <ng-template #userDeleted>
             <p class="user-deleted">User deleted</p>
           </ng-template>
-          <ion-icon name="create" (click)="createComment(tweet)" ></ion-icon>
+          <ion-icon name="md-chatbubbles" (click)="createComment(tweet)" ></ion-icon>
   
         </ion-label>
         <ion-note slot="end">{{ tweet.created_at | unictDate: 1 }}</ion-note>
