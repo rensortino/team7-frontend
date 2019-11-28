@@ -19,7 +19,7 @@
           <ion-item id='lista_commenti'>
             <ion-label>
               <h2>{{comment.tweet}}</h2>
-              <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(comment)">
+              <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(comment)"> <!-- SISTEMARE QUI-->
                   {{ getAuthor(comment) }} 
                   <ion-icon *ngIf="canEdit(comment)" name="heart" color="danger-tint"></ion-icon> 
                 </p>

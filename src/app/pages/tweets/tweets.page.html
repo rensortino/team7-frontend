@@ -19,11 +19,11 @@
   
           <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(tweet)">
             {{ getAuthor(tweet) }} 
-            <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
+            <!--<ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> -->
           </p>  
           <ion-badge id='like_zone'>       
             <ion-icon  (click)="like(tweet)" [name]="userLiked(tweet) ? 'heart' : 'heart-empty'" class='like'></ion-icon> 
-            <span>{{getLikesCount(tweet)}}</span>
+            <span id="contatore">{{getLikesCount(tweet)}}</span>
           </ion-badge>
 
           <ng-template #userDeleted>
