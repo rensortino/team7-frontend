@@ -16,7 +16,7 @@
 
         <ion-item-sliding *ngFor="let comment of comments">
     
-          <ion-item>
+          <ion-item id='lista_commenti'>
             <ion-label>
               <h2>{{comment.tweet}}</h2>
               <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(comment)">
@@ -36,7 +36,7 @@
 
     <ion-item>
   
-      <ion-label position="stacked">Write your message</ion-label>
+      <ion-label id='comment_field' position="stacked">Write your comment</ion-label>
   
       <ion-textarea minlength="1" maxlength="120" [(ngModel)]="newComment.tweet"></ion-textarea>
   
