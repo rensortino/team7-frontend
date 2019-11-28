@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>tweets</ion-title>
+    <p>
+      <ion-searchbar placeholder="Ashtag"></ion-searchbar>
+    </p>
   </ion-toolbar>
 </ion-header>
 
@@ -19,8 +22,8 @@
             <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
           </p>  
           <ion-badge id='like_zone'>       
-            <ion-icon  (click)="like(tweet)" name="thumbs-up" class="like" [class.liked]="userLiked(tweet)"></ion-icon> 
-            <span color="black">{{getLikesCount(tweet)}}</span>
+            <ion-icon  (click)="like(tweet)" [name]="userLiked(tweet) ? 'heart' : 'heart-empty'" class='like'></ion-icon> 
+            <span>{{getLikesCount(tweet)}}</span>
           </ion-badge>
 
           <ng-template #userDeleted>

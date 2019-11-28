@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Tweet } from 'src/app/interfaces/tweet';
-import  { User } from '../../interfaces/user';
 import { TweetsService } from 'src/app/services/tweets/tweets.service';
 import { ModalController } from '@ionic/angular';
 import { NewCommentPage } from '../new-comment/new-comment.page';
@@ -9,8 +8,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
-import { stringify } from 'querystring';
-import { RouteConfigLoadEnd } from '@angular/router';
 
 @Component({
   selector: 'app-tweets',
