@@ -18,8 +18,7 @@
                 {{ getAuthor(tweet) }} 
                 <ion-icon *ngIf="canEdit(tweet)" name="heart" color="danger-tint"></ion-icon> 
               </p>           
-              <ion-badge color = 'danger'>{{getLikesCount(tweet)}}</ion-badge>
-              <ion-icon name = 'ios-star'></ion-icon>
+              <ion-icon (click)="addfavourite(tweet)" name = 'ios-star' class="star-size"></ion-icon>
               <ng-template #userDeleted>
                 <p class="user-deleted">User deleted</p>
               </ng-template>
