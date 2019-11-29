@@ -1,14 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>tweets</ion-title>
-    <p>
-      <ion-searchbar placeholder="Ashtag"></ion-searchbar>
-    </p>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <p>
+    <ion-searchbar placeholder="Ricerca per Hashtag" (ionChange)="getFilteredTweets($event.target.value)" (ionClear)="getTweets()" ></ion-searchbar>
+  </p>
   <ion-list>
 
     <ion-item-sliding *ngFor="let tweet of tweets">

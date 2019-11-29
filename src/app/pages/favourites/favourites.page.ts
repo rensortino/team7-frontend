@@ -30,6 +30,10 @@ export class FavouritesPage implements OnInit {
 
   }
 
+  async ionViewWillEnter() {
+    await this.getFavouritesTweets();
+  }
+
  
 
   

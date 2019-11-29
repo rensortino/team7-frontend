@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { UniLoaderService } from 'src/app/shared/uniLoader.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { ToastTypes } from 'src/app/enums/toast-types.enum';
+import { HashtagService } from 'src/app/services/hashtag/hashtag.service';
 
 @Component({
   selector: 'app-tweets',
@@ -25,7 +26,8 @@ export class TweetsPage implements OnInit {
     private modalCtrl: ModalController,
     private auth: AuthService,
     private uniLoader: UniLoaderService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private hashtagService: HashtagService
   ) { }
 
   async ngOnInit() {
@@ -33,7 +35,18 @@ export class TweetsPage implements OnInit {
     // Quando carico la pagina, riempio il mio array di Tweets
     await this.getTweets();
   }
-
+  // Story 4
+  async getFilteredTweets(str : String){
+    try {
+      if(str){
+        this.tweets = await this.hashtagService.getFilteredTweets(str);
+      } else {
+         await this.getTweets();
+      }
+    } catch (err) {
+      
+    }
+  }
   async getTweets() {
 
     try {
