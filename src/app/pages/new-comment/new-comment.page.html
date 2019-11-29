@@ -18,7 +18,7 @@
     
           <ion-item id='lista_commenti'>
             <ion-label>
-              <ion-input [readonly]="!canEdit(comment)" [(ngModel)]="comment.tweet"></ion-input>
+              <ion-input id='wrappato' [readonly]="!canEdit(comment)" [(ngModel)]="comment.tweet"></ion-input>
               <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(comment)"> <!-- SISTEMARE QUI-->
                   {{ getAuthor(comment) }} 
                   <ion-icon *ngIf="canEdit(comment)" name="heart" color="danger-tint"></ion-icon> 
@@ -28,7 +28,7 @@
               </ng-template>
       
             </ion-label>
-            <ion-note slot="end">{{ comment.created_at }}</ion-note>
+            
           </ion-item>
           <ion-item-options *ngIf="canEdit(comment)" side="end">
             <ion-item-option color="danger" (click)="deleteComment(comment)">
