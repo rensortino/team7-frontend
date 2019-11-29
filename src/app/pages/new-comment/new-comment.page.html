@@ -17,24 +17,24 @@
         <ion-item-sliding *ngFor="let comment of comments">
     
           <ion-item id='lista_commenti'>
-            <ion-label>
-              <ion-input [readonly]="!canEdit(comment)" [(ngModel)]="comment.tweet"></ion-input>
-              <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(comment)"> <!-- SISTEMARE QUI-->
-                  {{ getAuthor(comment) }} 
-                  <ion-icon *ngIf="canEdit(comment)" name="heart" color="danger-tint"></ion-icon> 
+                <ion-input [readonly] ="readOnly" [(ngModel)]="comment.tweet"></ion-input>
+                <p *ngIf="tweet._author; else userDeleted" class="user" [class.me]="canEdit(comment)"> <!-- SISTEMARE QUI-->
+                    {{ getAuthor(comment) }} 
+                    <ion-icon *ngIf="canEdit(comment)" name="heart" color="danger-tint"></ion-icon> 
                 </p>
               <ng-template #userDeleted>
                 <p class="user-deleted">User deleted</p>
               </ng-template>
-      
-            </ion-label>
-            <ion-note slot="end">{{ comment.created_at }}</ion-note>
-          </ion-item>
-          <ion-item-options *ngIf="canEdit(comment)" side="end">
-            <ion-item-option color="danger" (click)="deleteComment(comment)">
+       
+            <ion-button *ngIf="canEdit(comment)" side0="end" color="secondary" (click)="editComment(comment)">
+              <ion-icon slot="icon-only"  name="create"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="canEdit(comment)" side="end" color="danger" (click)="deleteComment(comment)">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
-            </ion-item-option>
-          </ion-item-options>
+            </ion-button>
+
+          </ion-item>
+          
         </ion-item-sliding>
     
       </ion-list>

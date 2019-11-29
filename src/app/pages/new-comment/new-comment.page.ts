@@ -20,6 +20,7 @@ export class NewCommentPage implements OnInit {
 
   parentTweet: Tweet;
 
+  readOnly = true;
 
   constructor(
     private modalCtrl: ModalController,
@@ -97,6 +98,46 @@ export class NewCommentPage implements OnInit {
 
     // Chiudo il loader
     await this.uniLoader.dismiss();
+
+  }
+
+  async editComment(comment: Tweet) {
+
+    // Se l'utente è in modalità modifica...
+    if (!this.readOnly) {
+      try {
+
+        // Avvio il loader
+        await this.uniLoader.show();
+
+        // Salvo le modifiche apportate all'oggetto 'me'
+        await this.tweetsService.editTweet(comment);
+
+        // Rimuovo il loader
+        await this.uniLoader.dismiss();
+
+        // Mostro toast di conferma
+        await this.toastService.show({
+          message: 'Your comment edit are now safe and sound!',
+          type: ToastTypes.SUCCESS
+        });
+
+      } catch (err) {
+
+        // Chiudo il loader
+        await this.uniLoader.dismiss();
+
+        // Nel caso la chiamata vada in errore, mostro l'errore in un toast
+        await this.toastService.show({
+          message: err.message,
+          type: ToastTypes.ERROR
+        });
+
+      }
+    }
+
+    // Altrimenti, cambio lo stato della mia variabile - per rendere i campi editabili o meno
+    this.readOnly = !this.readOnly;
 
   }
 
