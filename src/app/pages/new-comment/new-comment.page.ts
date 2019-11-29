@@ -20,6 +20,7 @@ export class NewCommentPage implements OnInit {
 
   parentTweet: Tweet;
 
+
   constructor(
     private modalCtrl: ModalController,
     private tweetsService: TweetsService,
@@ -65,6 +66,41 @@ export class NewCommentPage implements OnInit {
 
   }
 
+  async deleteComment(comment: Tweet) {
+
+    try {
+
+      // Mostro il loader
+      await this.uniLoader.show();
+
+      // Cancello il mio tweet
+      await this.tweetsService.deleteTweet(comment._id);
+
+      // Riaggiorno la mia lista di tweets
+      await this.getComments();
+
+      // Mostro un toast di conferma
+      await this.toastService.show({
+        message: 'Your tweet was deleted successfully!',
+        type: ToastTypes.SUCCESS
+      });
+
+    } catch (err) {
+
+      // Nel caso la chiamata vada in errore, mostro l'errore in un toast
+      await this.toastService.show({
+        message: err.message,
+        type: ToastTypes.ERROR
+      });
+
+    }
+
+    // Chiudo il loader
+    await this.uniLoader.dismiss();
+
+  }
+
+
   getAuthor(tweet: Tweet): string {
 
     if (this.canEdit(tweet)) {
@@ -76,15 +112,14 @@ export class NewCommentPage implements OnInit {
 
   canEdit(tweet: Tweet): boolean {
 
-    // Controllo che l'autore del tweet coincida col mio utente
     if (tweet._author) {
       return tweet._author._id === this.auth.me._id;
     }
 
     return false;
 
-  }
 
+  }
 
   async createComment() {
 
@@ -98,9 +133,6 @@ export class NewCommentPage implements OnInit {
       await this.tweetsService.createComment(this.newComment);
         
 
-      // Chiudo la modal
-      await this.dismiss();
-
     } catch (err) {
 
       // Nel caso la chiamata vada in errore, mostro l'errore in un toast
@@ -110,6 +142,8 @@ export class NewCommentPage implements OnInit {
       });
 
     }
+    await this.getComments();
+    this.newComment.tweet = "";
 
     // Chiudo il loader
     await this.uniLoader.dismiss();
