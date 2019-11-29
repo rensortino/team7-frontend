@@ -17,9 +17,20 @@
 .like{
     color: red;
     font-size: 20px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.like:hover{
+    opacity: 1;
 }
 .comment-size{
     font-size: 20px;
+    opacity: 0.6;
+    transition: 0.3s;
+    color: blue;
+}
+.comment-size:hover{
+    opacity:1;
 }
 #contatore{
     color:black;
@@ -28,4 +39,9 @@
     color:gold;
     font-size: 20px;
     margin-left: 5%;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.star-size:hover{
+    opacity: 1;
 }

@@ -40,8 +40,8 @@ export class FavouritesPage implements OnInit {
   getLikesCount(tweet: Tweet) : number {
     return tweet._likes.length;
   }
-  async addfavourite(tweet: Tweet) {
-    await this.usersService.addfavourite(tweet);
+  async favourite(tweet: Tweet) {
+    await this.usersService.favourite(tweet);
     await this.getFavouritesTweets();
     return
   }

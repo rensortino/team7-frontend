@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from 'src/app/interfaces/user';
 import { Tweet } from 'src/app/interfaces/tweet';
 import { TweetsService } from 'src/app/services/tweets/tweets.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -19,6 +20,8 @@ import { HashtagService } from 'src/app/services/hashtag/hashtag.service';
 export class TweetsPage implements OnInit {
 
   tweets: Tweet[] = [];
+  me : User;
+
   
   constructor(
     private tweetsService: TweetsService,
@@ -34,10 +37,21 @@ export class TweetsPage implements OnInit {
 
     // Quando carico la pagina, riempio il mio array di Tweets
     await this.getTweets();
+    await this.getMe();
   }
-  
+  async ionViewWillEnter() {
+    await this.getMe();
+  }
 
   // Story 4
+
+  async getMe(){
+    let users = await this.usersService.getUsers();
+    users.forEach(element => {
+      if(this.auth.me._id === element._id)
+        this.me = element;
+      });
+  }
   async getFilteredTweets(str : String){
     try {
       if(str){
@@ -144,19 +158,23 @@ export class TweetsPage implements OnInit {
   }
 
   // STORY 3
-  async addfavourite(tweet: Tweet) {
-    await this.usersService.addfavourite(tweet);
+  async favourite(tweet: Tweet) {
+    await this.usersService.favourite(tweet);
+
     await this.getTweets();
+    await this.getMe();
     return
   }
 // CONTROLLA SE GIA NEI PREFERITI
   favouriteSetted(tweet: Tweet) : boolean{
     let i: number;
     let flag: boolean = false;
-    let me  = this.auth.me;
-    for(i = 0; i < me._preferiti.length ; i++){
-      if(me._preferiti[i] === tweet._id)
+    console.log(this.me._preferiti);
+    for(i = 0; i < this.me._preferiti.length ; i++){
+      if( this.me._preferiti[i] === tweet._id){
         flag = true;
+      }
+        
     }
     return flag; 
   }

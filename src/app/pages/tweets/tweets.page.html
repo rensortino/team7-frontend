@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>tweets</ion-title>
-    <p>
-      <ion-searchbar placeholder="Ricerca per Hashtag" (ionChange)="getFilteredTweets($event.target.value)" (ionClear)="getTweets()" ></ion-searchbar>
-    </p>
   </ion-toolbar>
+  <p>
+    <ion-searchbar placeholder="Ricerca per Hashtag" (ionChange)="getFilteredTweets($event.target.value)" (ionClear)="getTweets()" ></ion-searchbar>
+  </p>
 </ion-header>
 
 <ion-content>
@@ -30,7 +30,7 @@
             <p class="user-deleted">User deleted</p>
           </ng-template>
           <ion-icon class='comment-size' name="md-chatbubbles" (click)="createComment(tweet)" ></ion-icon>
-          <ion-icon class="star-size" [name]="favouriteSetted(tweet) ? 'star' : 'star-outline'" (click)="addfavourite(tweet)"></ion-icon> 
+          <ion-icon class="star-size" [name]="favouriteSetted(tweet) ? 'star' : 'star-outline'" (click)="favourite(tweet)"></ion-icon> 
           
         </ion-label>
         <ion-note slot="end">{{ tweet.created_at | unictDate: 1 }}</ion-note>
