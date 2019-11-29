@@ -29,8 +29,7 @@
             <p class="user-deleted">User deleted</p>
           </ng-template>
           <ion-icon class='comment-size' name="md-chatbubbles" (click)="createComment(tweet)" ></ion-icon>
-          <!--<ion-icon class="star-size" [name]="favouriteSetted(tweet) ? 'star' : 'star-outline'" (click)="addfavourite(tweet)"></ion-icon> -->
-          <ion-icon class='star-size' name='star-outline' (click)="addfavourite(tweet)"></ion-icon>
+          <ion-icon (click)="addfavourite(tweet)" class="star-size" [name]="favouriteSetted(tweet) ? 'star' : 'star-outline'"></ion-icon> 
         </ion-label>
         <ion-note slot="end">{{ tweet.created_at | unictDate: 1 }}</ion-note>
       </ion-item>

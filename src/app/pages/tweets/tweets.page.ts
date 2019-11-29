@@ -35,6 +35,8 @@ export class TweetsPage implements OnInit {
     // Quando carico la pagina, riempio il mio array di Tweets
     await this.getTweets();
   }
+  
+
   // Story 4
   async getFilteredTweets(str : String){
     try {
@@ -143,18 +145,20 @@ export class TweetsPage implements OnInit {
 
   // STORY 3
   async addfavourite(tweet: Tweet) {
-    await this.usersService.addfavourite(tweet)
+    await this.usersService.addfavourite(tweet);
+    await this.getTweets();
+    return
   }
-
+// CONTROLLA SE GIA NEI PREFERITI
   favouriteSetted(tweet: Tweet) : boolean{
     let i: number;
     let flag: boolean = false;
     let me  = this.auth.me;
-    /*for(i = 0; i < me._favourites.length ; i++){
-      if(me._favourites[i] === tweet._id)
+    for(i = 0; i < me._preferiti.length ; i++){
+      if(me._preferiti[i] === tweet._id)
         flag = true;
-    }*/ 
-    return flag; //me._favourites è UNDEFINED...
+    }
+    return flag; 
   }
   
   getLikesCount(tweet: Tweet) : number {
