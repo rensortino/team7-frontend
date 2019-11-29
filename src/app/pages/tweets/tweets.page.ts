@@ -123,19 +123,26 @@ export class TweetsPage implements OnInit {
   }
 
   async like(tweet: Tweet)  { 
-
     await this.tweetsService.like(tweet);
     await this.getTweets();
-
-    console.log('liked')
     return 
-
-
   }
+
+  // STORY 3
   async addfavourite(tweet: Tweet) {
     await this.usersService.addfavourite(tweet)
   }
 
+  favouriteSetted(tweet: Tweet) : boolean{
+    let i: number;
+    let flag: boolean = false;
+    let me  = this.auth.me;
+    /*for(i = 0; i < me._favourites.length ; i++){
+      if(me._favourites[i] === tweet._id)
+        flag = true;
+    }*/ 
+    return flag; //me._favourites è UNDEFINED...
+  }
   
   getLikesCount(tweet: Tweet) : number {
       return tweet._likes.length;

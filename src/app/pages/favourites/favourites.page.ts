@@ -48,9 +48,6 @@ export class FavouritesPage implements OnInit {
       // Popolo il mio array di oggetti 'Tweet' con quanto restituito dalla chiamata API
       this.favouritesTweets = await this.usersService.getfavourites();
 
-      console.log(this.favouritesTweets)
-      
-
       // La chiamata è andata a buon fine, dunque rimuovo il loader
       await this.uniLoader.dismiss();
 
