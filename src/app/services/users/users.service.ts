@@ -47,7 +47,7 @@ export class UsersService {
     }).toPromise();
   }
   // ADD FAVOURITE
-  async addfavourite(tweet: Tweet) {
+  async favourite(tweet: Tweet) {
     const headerOptions = this.httpOptions.headers.append('Authorization', `Bearer ${this.auth.userToken}`);
     return this.http.put<User>(`${environment.API_URL}/users/prefer/${tweet._id}`, {}, {
       headers: headerOptions
